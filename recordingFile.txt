@@ -1,0 +1,36 @@
+The recording file format:
+Files are stored in the `recordings/`
+
+The recording file format:
+Here's an example of a part of a recording file
+
+English 7 Manual
+MOVE 3 5 3 4 3 3
+MOVE 3 2 3 3 3 4
+RANDOMIZE E E P P P E E E E P H H E E P P H H P P P P H P H H H P H P P H P P P E E P H P E E E E P P P E E
+
+The first line is the header. It displays the board and game mode info
+English: Board type
+7: Board Size
+Manual: Game mode
+
+Move Lines:
+MOVE 3 5 3 4 3 3
+The token at position 1 displays the event type.
+MOVE: Event type
+The token at position 2-3 displays the origin row and column
+'3 5': Origin row, col — where the jumping peg was
+The token at position 4-5 displays the jumped row and column
+'3 4': Jumped row, col — the peg that was removed
+The token at position 6-7 displays the destination row and column
+'3 3': Destination row, col — where the jumping peg landed
+Coordinates are zero-indexed, measured in grid cells. For example, `MOVE 3 5 3 4 3 3` means: the peg at row 3,
+column 5 jumped over the peg at row 3, column 4 and landed at row 3, column 3.
+The Move lines for other game boards and modes are displayed like this format.
+
+RANDOMIZE lines:
+The first token is `RANDOMIZE`. The remaining `size × size` tokens list every cell of the grid in row-major order
+(top-left to bottom-right, row by row):
+Token 'P': Peg — a marble is present
+Token 'H': a playable empty space
+Token 'E': Empty — outside the board shape (not a valid cell)
